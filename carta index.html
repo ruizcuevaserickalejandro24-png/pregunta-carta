@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Tengo una pregunta!</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffcccc; /* Color de fondo rosa pastel */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            color: #333;
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.1s;
+        }
+        #btnSi {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+        }
+        #btnNo {
+            background-color: #f44336; /* Rojo */
+            color: white;
+            position: relative; /* Necesario para que JavaScript lo mueva */
+        }
+        #mensajeExito {
+            display: none; /* Oculto inicialmente */
+        }
+        img {
+            width: 200px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="pantallaPregunta">
+        <h1>Hola :D ❤️</h1>
+        <p>Llevo tiempo queriendo decirte esto...</p>
+        <h2>¿Quieres ser mi novia?</h2>
+        <div class="btn-container">
+            <button id="btnSi">¡Sí!</button>
+            <button id="btnNo">No</button>
+        </div>
+    </div>
+
+    <div class="container" id="mensajeExito">
+        <h1>¡Sabía que dirías que sí! 💖</h1>
+        <p>Te quiero mucho.</p>
+        <img src="https://i.pinimg.com/originals/9b/3b/b1/9b3bb1601a0cb6cba5f532a6eb17e170.gif" alt="Abrazo feliz">
+    </div>
+
+    <script>
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+        const pantallaPregunta = document.getElementById('pantallaPregunta');
+        const mensajeExito = document.getElementById('mensajeExito');
+
+        // Función para mover el botón "No"
+        function esquivarBoton() {
+            // Obtenemos el tamaño de la ventana
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            
+            // Cambiamos la posición del botón a absoluta y le asignamos nuevas coordenadas
+            btnNo.style.position = 'absolute';
+            btnNo.style.left = `${Math.abs(x)}px`;
+            btnNo.style.top = `${Math.abs(y)}px`;
+        }
+
+        // Activamos la función cuando el ratón pasa por encima (computadora) o se toca (celular)
+        btnNo.addEventListener('mouseover', esquivarBoton);
+        btnNo.addEventListener('touchstart', esquivarBoton); // Importante para que funcione en móviles
+
+        // Cuando se hace clic en "Sí"
+        btnSi.addEventListener('click', () => {
+            pantallaPregunta.style.display = 'none'; // Oculta la pregunta
+            mensajeExito.style.display = 'block';    // Muestra el mensaje de éxito
+        });
+    </script>
+
+</body>
+</html>
